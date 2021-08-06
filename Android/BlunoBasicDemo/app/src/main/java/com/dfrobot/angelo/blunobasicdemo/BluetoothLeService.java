@@ -317,11 +317,28 @@ public class BluetoothLeService extends Service {
 //        } else {
             // For all other profiles, writes the data formatted in HEX.
             final byte[] data = characteristic.getValue();
+            String msg=decodePackage(data);//其实也可以不写成一个函数，直接在这里给decode成好几个int或者float，然后putExtra
             if (data != null && data.length > 0) {
-                intent.putExtra(EXTRA_DATA, new String(data));
+//                intent.putExtra(EXTRA_DATA, new String(data));
+                intent.putExtra(EXTRA_DATA, msg);
         		sendBroadcast(intent);
             }
 //        }
+    }
+    private static final String CHARSET_NAME="utf-8";
+    public String decodePackage(byte[] netData)
+    {
+        if(netData==null)
+        {
+            return "";
+        }
+        try{
+            return new String(netData,CHARSET_NAME);
+        }catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public class LocalBinder extends Binder {

@@ -245,7 +245,7 @@ public abstract  class BlunoLibrary  extends Activity{
 		// User chose not to enable Bluetooth.
 		if (requestCode == REQUEST_ENABLE_BT
 				&& resultCode == Activity.RESULT_CANCELED) {
-			((Activity) mainContext).finish();
+			((Activity) mainContext).finish();//如果打开蓝牙失败，那么就finish
 			return;
 		}
 	}
@@ -437,8 +437,14 @@ public abstract  class BlunoLibrary  extends Activity{
 				@Override
 				public void run() {
 					System.out.println("mLeScanCallback onLeScan run ");
-					mLeDeviceListAdapter.addDevice(device);
-					mLeDeviceListAdapter.notifyDataSetChanged();
+					String deviceName = device.getName();
+//					if(!deviceName.equals("Unknown device"))
+					if(deviceName != null)
+					{
+						mLeDeviceListAdapter.addDevice(device);
+						mLeDeviceListAdapter.notifyDataSetChanged();
+					}
+
 				}
 			});
 		}

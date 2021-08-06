@@ -120,6 +120,7 @@ public class MainActivity  extends BlunoLibrary {
 		((ScrollView)serialReceivedText.getParent()).fullScroll(View.FOCUS_DOWN);
 	}
 
+	//下面这一段是为了获取到权限，才能够扫描得到
 	@SuppressLint("WrongConstant")
 	private void getPermission() {
 //		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
